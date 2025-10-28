@@ -1,10 +1,629 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>Vibrent GitHub Training - DKlein</title>
-  </head>
-  <body>
-    <h1>Hello from Dave Klein’s GitHub Training Repo</h1>
-    <p>If you see this at developercenter-vrp.vibrenthealth.com/githubtraining/dklein, deployment worked!</p>
-  </body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MCW Cancer Passport Registry - Medical College of Wisconsin Cancer Center research registry">
+    <title>MCW Cancer Passport Registry | Medical College of Wisconsin Cancer Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Custom Properties */
+        :root {
+            --primary-maroon: #650032;
+            --primary-blue: #003399;
+            --primary-purple: #6a2a85;
+            --accent-gold: #f0a000;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f9f9f9;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Text', Georgia, serif;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary-maroon) 0%, var(--primary-purple) 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            display: block;
+            background-color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(101, 0, 50, 0.95) 0%, rgba(106, 42, 133, 0.9) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23650032" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--text-dark);
+            padding: 1rem 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background-color: #ffb627;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--primary-maroon);
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-maroon), var(--primary-purple));
+            border-radius: 2px;
+        }
+
+        /* Purpose Section */
+        .purpose-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .purpose-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .purpose-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .purpose-card h3 {
+            color: var(--primary-purple);
+            margin-bottom: 1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Eligibility Section */
+        .eligibility-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .eligibility-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .eligibility-list li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--bg-light);
+            border-left: 4px solid var(--primary-maroon);
+            border-radius: 5px;
+        }
+
+        .eligibility-list li::before {
+            content: "✓ ";
+            color: var(--primary-purple);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-maroon), var(--primary-purple));
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .team-member h3 {
+            color: var(--primary-maroon);
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+        }
+
+        /* Privacy Section */
+        .privacy-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .privacy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .privacy-item {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .privacy-item h3 {
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* FAQ Section */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            background: linear-gradient(135deg, var(--primary-maroon), var(--primary-purple));
+            color: var(--white);
+            padding: 1.5rem;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .faq-question:hover {
+            opacity: 0.9;
+        }
+
+        .faq-answer {
+            padding: 1.5rem;
+            background: var(--white);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-card h3 {
+            color: var(--primary-purple);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-maroon) 0%, var(--primary-purple) 100%);
+            color: var(--white);
+            padding: 3rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+        }
+
+        .powered-by {
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .powered-by img {
+            height: 30px;
+            width: auto;
+            vertical-align: middle;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--primary-maroon);
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.7rem; }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="CPR_MCofWisconsin_Horizontal.png" alt="MCW Cancer Center Logo">
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="#purpose">Purpose</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#eligibility">Eligibility</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#privacy">Privacy</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content"><h1>MCW Cancer Passport Registry</h1><p>Join a research registry at the Medical College of Wisconsin Cancer Center that helps match people with cancer to studies and trials—safely, securely, and on your terms.</p><a href="#contact" class="cta-button">Join the Registry</a></div>
+    </section>
+
+    <!-- Purpose Section -->
+    <section id="purpose">
+        <h2 class="section-title">Our Purpose</h2><div class="purpose-grid"><div class="purpose-card"><h3>Open the Door to Research</h3><p>The registry creates a secure, research-ready way for people with cancer and cancer survivors to share key health information so researchers can quickly identify relevant studies and trials.</p></div><div class="purpose-card"><h3>Faster, Fairer Access</h3><p>With standardized data and advance consent, MCW investigators can shorten the time from protocol approval to first-patient-in—broadening access to opportunities across cancer types and stages.</p></div><div class="purpose-card"><h3>Built for Trust</h3><p>Participation is voluntary, takes ~15–20 minutes for the required steps, and uses HIPAA-compliant safeguards with explicit consent and the right to withdraw at any time.</p></div></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About the Registry</h2><div class="about-content"><p>The MCW Cancer Passport Registry is an observational research registry. It does not involve experimental drugs or procedures; instead it securely brings together key information you choose to share—like diagnosis details, surveys, and a secure connection to your electronic health records—to help researchers match you to relevant studies and trials.</p><p>What we collect:</p><ul><li>Basic information and contact preferences</li><li>Diagnosis and treatment details (from your medical records via a participant-mediated connection)</li><li>Quality-of-life surveys (EORTC QLQ-C30)</li><li>Optional modules, such as connecting a wearable device</li></ul><p>How it works:</p><ul><li>Review and sign a short electronic consent</li><li>Complete required baseline steps (~15–20 minutes total)</li><li>Optionally connect a wearable and/or opt-in to future sub-studies</li><li>We may re-contact you about IRB-approved opportunities that fit your profile</li></ul><div class="video-container"><iframe src="https://player.vimeo.com/video/1126252491?h=0&title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="MCW Cancer Passport Registry Video"></iframe></div></div>
+    </section>
+
+    <!-- Eligibility Section -->
+    <section id="eligibility">
+        <h2 class="section-title">Eligibility</h2><div class="eligibility-content"><p>You can join if all of the following are true:</p><ul class="eligibility-list"><li>You are a current or former cancer patient (survivor).</li><li>You are age 18 or older and live in the United States.</li><li>You can give consent to participate.</li></ul><p><strong>You cannot join</strong> if any of the following apply:</p><ul class="eligibility-list"><li>You live outside of the United States.</li><li>You are unable to provide consent.</li><li>You are currently incarcerated.</li></ul></div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team">
+        <h2 class="section-title">Our Research Team</h2><div class="team-grid"><div class="team-member"><div class="team-member-photo">PI</div><h3>MCW Site Principal Investigator</h3><p>Leads the registry at MCW and oversees participant safety, data quality, and IRB compliance.</p></div><div class="team-member"><div class="team-member-photo">RC</div><h3>Research Coordinator</h3><p>Guides you through consent and enrollment, answers questions, and supports follow-up.</p></div><div class="team-member"><div class="team-member-photo">DA</div><h3>Data Analyst</h3><p>Ensures your data are harmonized and research-ready while protecting confidentiality.</p></div><div class="team-member"><div class="team-member-photo">CS</div><h3>Clinical Specialist</h3><p>Connects registry activities with your clinical care team when needed.</p></div></div>
+    </section>
+
+    <!-- Privacy & Ethics Section -->
+    <section id="privacy">
+        <h2 class="section-title">Privacy & Ethics</h2><div class="privacy-content"><p style="text-align:center; margin-bottom:2rem;">Your privacy and the ethical use of your data are our highest priorities.</p><div class="privacy-grid"><div class="privacy-item"><h3>IRB Oversight</h3><p>The registry is conducted under Institutional Review Board (IRB) oversight; all participant materials and amendments are IRB-approved before use.</p></div><div class="privacy-item"><h3>HIPAA-Compliant Safeguards</h3><p>Data are collected and stored using HIPAA-compliant security controls, including encryption in transit and at rest, role-based access, and audit logs.</p></div><div class="privacy-item"><h3>Participant Control</h3><p>You choose what to share, can withdraw at any time, and we only share coded data with qualified researchers unless you explicitly authorize contact for a specific study.</p></div><div class="privacy-item"><h3>De-identification & Governance</h3><p>When data are shared for research, direct identifiers are removed; all data sharing follows local governance and IRB approvals.</p></div></div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq">
+        <h2 class="section-title">Frequently Asked Questions</h2><div class="faq-container"><div class="faq-item"><div class="faq-question">What is the MCW Cancer Passport Registry?</div><div class="faq-answer"><p>An observational registry that securely gathers information from people with cancer and cancer survivors to help identify relevant clinical trials and research studies more efficiently.</p></div></div><div class="faq-item"><div class="faq-question">Does joining affect my care?</div><div class="faq-answer"><p>No. Participation is voluntary and does not affect your clinical care. You may withdraw at any time.</p></div></div><div class="faq-item"><div class="faq-question">How long does enrollment take?</div><div class="faq-answer"><p>Most people complete the required steps in about 15–20 minutes (eConsent, a brief baseline survey set, and a secure medical-record connection). Optional modules may add a few minutes.</p></div></div><div class="faq-item"><div class="faq-question">What information is shared with researchers?</div><div class="faq-answer"><p>We share coded (de-identified) data for research uses under IRB oversight. Your name and contact details are only shared if you explicitly authorize contact for a specific study.</p></div></div><div class="faq-item"><div class="faq-question">Can I be in this registry and a clinical trial at the same time?</div><div class="faq-answer"><p>Yes. This registry does not prevent participation in other research. Individual trials have their own rules that your care team will review with you.</p></div></div><div class="faq-item"><div class="faq-question">How will you contact me later?</div><div class="faq-answer"><p>We may re-contact you electronically about IRB-approved opportunities or to confirm your consent preferences. You control whether to proceed.</p></div></div></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Contact Us</h2><div class="contact-content"><p>Interested in participating or have questions about the MCW Cancer Passport Registry? We're here to help.</p><div class="contact-info"><div class="contact-card"><h3>Phone</h3><p><a href="tel:414-805-8900">(414) 805-8900</a></p></div><div class="contact-card"><h3>Email</h3><p><a href="mailto:cancerregistry@mcw.edu">cancerregistry@mcw.edu</a></p></div><div class="contact-card"><h3>Location</h3><p>Medical College of Wisconsin<br>Cancer Center<br>Milwaukee, WI</p></div></div><div style="margin-top: 3rem;"><a href="#" class="cta-button">Request More Information</a></div></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">MCW Cancer Passport Registry</div>
+            <p>Medical College of Wisconsin Cancer Center</p>
+
+            <div class="footer-links">
+                <a href="https://www.mcw.edu">MCW Home</a>
+                <a href="https://www.mcw.edu/departments/cancer-center">Cancer Center</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Accessibility</a>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Medical College of Wisconsin. All rights reserved.</p>
+                <p>This registry is approved by the MCW Institutional Review Board.</p>
+                <div class="powered-by">
+                    <span>Powered by</span>
+                    <img src="Vibrent Logo White Text Transparent Background.png" alt="Vibrent">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
 </html>
